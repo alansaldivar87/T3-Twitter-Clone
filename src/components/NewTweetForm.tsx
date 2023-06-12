@@ -38,13 +38,13 @@ function Form() {
 
   const createTweet = api.tweet.create.useMutation({
     onSuccess: (newTweet) => {
-      console.log(newTweet);
+      setInputValue("");
     },
   });
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    createTweet.mutate({ text: inputValue });
+    createTweet.mutate({ content: inputValue });
   };
 
   if (session.status !== "authenticated") return null;

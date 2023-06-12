@@ -4,11 +4,11 @@ import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 export const tweetRouter = createTRPCRouter({
   // Only for authenticated users
   create: protectedProcedure
-    .input(z.object({ text: z.string() }))
-    .mutation(async ({ input: { text }, ctx }) => {
+    .input(z.object({ content: z.string() }))
+    .mutation(async ({ input: { content }, ctx }) => {
       const tweet = await ctx.prisma.tweet.create({
         data: {
-          content: text,
+          content,
           userId: ctx.session.user.id,
         },
       });
